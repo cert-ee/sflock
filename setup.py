@@ -26,7 +26,7 @@ setup(
     include_package_data=True,
     python_requires='>3.6',
     install_requires=[
-        "click==7.0",
+        "click>=8.1.2",
         "cryptography>=3.3.2, <3.4",
         "olefile>=0.43,<0.50",
         "peepdf>=0.4.1,<0.5",
