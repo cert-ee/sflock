@@ -8,10 +8,11 @@ import tempfile
 
 from sflock.abstracts import Unpacker
 
+
 class RarFile(Unpacker):
     name = "rarfile"
     exe = "/usr/bin/rar"
-    exts = ".rar"
+    exts = ".rar", ".z"
     magic = "RAR archive"
     dependency = "rar"
 
