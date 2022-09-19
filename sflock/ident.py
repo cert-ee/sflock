@@ -4,6 +4,7 @@
 
 import re
 
+
 def hta(f):
     headstart = re.search(
         rb"<[\s+]{0,128}head[\s+]{0,128}", f.contents, re.I
@@ -19,11 +20,12 @@ def hta(f):
     STRINGS = [
         b"<title", b"<body", b"SINGLEINSTANCE",
         b"<script", b"<input", b"WINDOWSTATE",
-        b"APPLICATIONNAME", b"SCROLL"
+        b"APPLICATIONNAME", b"SCROLL", b"<meta"
     ]
     for string in STRINGS:
         if string in f.contents[headstart.end():]:
             return "hta"
+
 
 def office_webarchive(f):
     STRINGS = [
@@ -50,9 +52,11 @@ def office_webarchive(f):
     if found >= 10:
         return "doc"
 
+
 def office_activemime(f):
     if f.contents.startswith((b"QWN0aXZlTWltZQ", b"ActiveMime")):
         return "doc"
+
 
 def powershell(f):
     POWERSHELL_STRS = [
@@ -70,6 +74,7 @@ def powershell(f):
     if found >= 2:
         return "ps1"
 
+
 def ruby(f):
     RB_STRS = [
         b"puts", b"END", b"START", b"require", b"ruby",
@@ -83,6 +88,7 @@ def ruby(f):
 
     if found > 3:
         return "rb"
+
 
 def javascript(f):
     JS_STRS = [
@@ -107,6 +113,7 @@ def javascript(f):
     if found >= 4:
         return "js"
 
+
 def wsf(f):
     # Search for a <job id='something'> tag. Keep in mind the tag might be
     # something like '<  JoB     id=''>'. Limit the amount of whitespace to
@@ -129,6 +136,7 @@ def wsf(f):
 
     return
 
+
 def visualbasic(f):
     VB_STRS = [
         b"Dim ", b"Set ", b"Attribute ", b"Public ",
@@ -147,6 +155,7 @@ def visualbasic(f):
         return "vbs"
     return
 
+
 def java(f):
     if not f.get_child(r".*\.class$", regex=True) \
             and not f.get_child("META-INF/MANIFEST.MF"):
@@ -154,6 +163,7 @@ def java(f):
     if f.get_child("AndroidManifest.xml"):
         return "apk"
     return "jar"
+
 
 def python(f):
     PY_STRS = [
@@ -194,6 +204,7 @@ def python(f):
     if found >= 4:
         return "py"
 
+
 def batch(f):
     BC_STRS = [
         b"@echo ", b"@setlocal ", b"@exit ", b"set ", b"@pause ",
@@ -210,6 +221,7 @@ def batch(f):
 
     if found >= 5:
         return "bat"
+
 
 def udf_token_search(f):
     """Tries to detect UDF filesystem.
