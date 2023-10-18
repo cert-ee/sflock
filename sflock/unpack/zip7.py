@@ -13,10 +13,10 @@ from sflock.abstracts import Unpacker
 class Zip7File(Unpacker):
     name = "7zfile"
     exe = "/usr/bin/7z"
-    exts = ".7z", ".iso", ".zip"
+    exts = ".7z", ".iso", ".zip", ".xz"
     # TODO Should we use "isoparser" (check PyPI) instead of 7z?
     magic = ("7-zip archive", "ISO 9660", "CDFV2 Encrypted",
-             "Zip archive", "UDF filesystem")
+             "Zip archive", "UDF filesystem", "XZ compressed data")
     priority = 1
     dependency = "p7zip-full"
 
