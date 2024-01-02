@@ -391,6 +391,7 @@ class File(object):
         self._md5 = None
         self._sha1 = None
         self._sha256 = None
+        self._sha512 = None
         self._mime = None
         self._magic = None
         self._mime_human = None
@@ -471,15 +472,18 @@ class File(object):
 
     def _hashes(self):
         sha256, s, buf = hashlib.sha256(), self.stream, True
+        sha512 = hashlib.sha512()
         sha1 = hashlib.sha1()
         md5 = hashlib.md5()
         while buf:
             buf = s.read(0x10000)
             sha256.update(buf)
+            sha512.update(buf)
             md5.update(buf)
             sha1.update(buf)
 
         self._sha256 = sha256.hexdigest()
+        self._sha512 = sha512.hexdigest()
         self._sha1 = sha1.hexdigest()
         self._md5 = md5.hexdigest()
 
@@ -500,6 +504,12 @@ class File(object):
         if not self._sha256:
             self._hashes()
         return self._sha256
+
+    @property
+    def sha512(self):
+        if not self._sha512:
+            self._hashes()
+        return self._sha512
 
     @property
     def magic(self):
