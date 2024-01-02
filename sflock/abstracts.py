@@ -391,6 +391,7 @@ class File(object):
         self._md5 = None
         self._sha1 = None
         self._sha256 = None
+        self._sha512 = None
         self._mime = None
         self._magic = None
         self._mime_human = None
@@ -500,6 +501,12 @@ class File(object):
         if not self._sha256:
             self._hashes()
         return self._sha256
+
+    @property
+    def sha512(self):
+        if not self._sha512:
+            self._hashes()
+        return self._sha512
 
     @property
     def magic(self):
