@@ -732,6 +732,7 @@ class File(object):
             "safelisted": self.safelisted,
             "safelist_reason": self.safelist_reason,
             "sha256": self.sha256,
+            "sha512": self.sha512,
             "md5": self.md5,
             "sha1": self.sha1,
             "type": "container" if self.children else "file",
