@@ -7,7 +7,7 @@ from setuptools import setup
 
 setup(
     name="SFlock",
-    version="1.0.4",
+    version="1.1.0",
     author="Hatching B.V.",
     author_email="jbr@hatching.io",
     packages=[
@@ -27,7 +27,7 @@ setup(
     python_requires='>3.6',
     install_requires=[
         "click>=8.1.2",
-        "cryptography>=41.0.4, <42.0.0",
+        "cryptography>=43.0.1",
         "olefile>=0.46,<0.50",
         "peepdf>=0.4.2,<0.5",
         "python-magic>=0.4,<0.5",
